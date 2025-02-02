@@ -1,6 +1,7 @@
+DROP TABLE IF EXISTS paintings;
 CREATE TABLE IF NOT EXISTS paintings (
   id SERIAL PRIMARY KEY,
-  title TEXT NOT NULL,
+  title TEXT,
   image_url TEXT,
   image_location TEXT,
   description TEXT,
