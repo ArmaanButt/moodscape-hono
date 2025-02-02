@@ -12,7 +12,16 @@
       "database_name": "prod-moodscape",
       "database_id": "b4727662-0a8f-43f7-8720-838d6337fd49"
     }
-  ]
+  ],
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "moodscape-embeddings-index"
+    }
+  ],
+  "ai": {
+    "binding": "AI"
+  }
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
@@ -31,9 +40,6 @@
   //     "bucket_name": "my-bucket"
   //   }
   // ],
-  // "ai": {
-  //   "binding": "AI"
-  // },
   // "observability": {
   //   "enabled": true,
   //   "head_sampling_rate": 1

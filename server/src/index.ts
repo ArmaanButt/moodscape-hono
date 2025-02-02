@@ -1,19 +1,21 @@
 import { Hono } from "hono";
 
-const app = new Hono();
+type Bindings = {
+  VECTORIZE: Vectorize;
+  AI: Ai;
+  DB: D1Database;
+};
+
+const app = new Hono<{ Bindings: Bindings }>().basePath("/api");
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
 
-app.get("/paintings", (c) => {
-  const paintings = [
-    { id: 1, title: "The Starry Night", artist: "Vincent van Gogh" },
-    { id: 2, title: "The Scream", artist: "Edvard Munch" },
-    { id: 3, title: "Mona Lisa", artist: "Leonardo da Vinci" },
-  ];
+app.get("/paintings", async (c) => {
+  const { results } = await c.env.DB.prepare("SELECT * FROM paintings;").all();
 
-  return c.json(paintings);
+  return c.json(results);
 });
 
 export default app;
