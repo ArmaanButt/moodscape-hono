@@ -21,7 +21,13 @@
   ],
   "ai": {
     "binding": "AI"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "moodscape.llmprism.com",
+      "custom_domain": true
+    }
+  ]
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
