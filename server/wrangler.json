@@ -24,7 +24,7 @@
   },
   "routes": [
     {
-      "pattern": "moodscape.llmprism.com",
+      "pattern": "api.moodscape.llmprism.com",
       "custom_domain": true
     }
   ]
