@@ -17,6 +17,10 @@ interface QueryResponse {
   paintings: Painting[];
 }
 
+const API_URL = import.meta.env.PROD
+  ? "https://moodscape-api.armaan-r-butt.workers.dev"
+  : "";
+
 export function ChatInterface() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +32,7 @@ export function ChatInterface() {
 
     try {
       const response = await fetch(
-        `/api/query?query=${encodeURIComponent(input)}`
+        `${API_URL}/api/query?query=${encodeURIComponent(input)}`
       );
       const data = await response.json();
       setResult(data);
