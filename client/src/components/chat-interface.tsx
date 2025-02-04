@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Card } from "./ui/card";
-import { PaintingResult } from "./painting-result";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { PaintingResult } from "@/components/painting-result";
 
 interface Painting {
   id: string;
@@ -27,7 +27,9 @@ export function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`/api/query?q=${encodeURIComponent(input)}`);
+      const response = await fetch(
+        `/api/query?query=${encodeURIComponent(input)}`
+      );
       const data = await response.json();
       setResult(data);
     } catch (error) {

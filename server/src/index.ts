@@ -25,7 +25,7 @@ app.get("/api/query", async (c) => {
   // Get query from request URL params
   const userQuery = c.req.query("query");
   if (!userQuery) {
-    return c.json({ error: "Missing query parameter 'q'" }, 400);
+    return c.json({ error: "Missing query parameter 'query'" }, 400);
   }
 
   // Get embedding for user query
@@ -33,7 +33,6 @@ app.get("/api/query", async (c) => {
     input: userQuery,
     model: "text-embedding-3-small",
   });
-
   // Find closest matching paintings in vector DB
   const matches = await c.env.VECTORIZE.query(
     embeddingResponse.data[0].embedding,
