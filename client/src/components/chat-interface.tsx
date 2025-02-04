@@ -17,9 +17,7 @@ interface QueryResponse {
   paintings: Painting[];
 }
 
-const API_URL = import.meta.env.PROD
-  ? "https://moodscape-api.armaan-r-butt.workers.dev"
-  : "";
+const API_URL = "https://api.moodscape.llmprism.com";
 
 export function ChatInterface() {
   const [input, setInput] = useState("");
