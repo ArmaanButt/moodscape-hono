@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import OpenAI from "openai";
 
 type Bindings = {
@@ -9,6 +10,8 @@ type Bindings = {
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+app.use("/api/*", cors());
 
 app.get("/api/", (c) => {
   return c.text("Hello Hono!");
