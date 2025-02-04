@@ -23,7 +23,7 @@ export function PaintingResult({ painting }: PaintingResultProps) {
         <img
           src={imageUrl}
           alt={painting.title}
-          className="w-48 h-48 object-cover rounded-md"
+          className="w-full h-96 object-cover rounded-md mx-auto"
           loading="lazy"
         />
       </div>

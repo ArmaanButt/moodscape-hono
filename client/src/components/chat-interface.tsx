@@ -42,7 +42,7 @@ export function ChatInterface() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-4">
       <Card className="p-6">
         <h1 className="text-2xl font-bold mb-4">Moodscape</h1>
         <p className="text-gray-600 mb-4">
