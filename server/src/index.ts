@@ -7,39 +7,55 @@ type Bindings = {
   DB: D1Database;
 };
 
-const app = new Hono<{ Bindings: Bindings }>().basePath("/api");
+const app = new Hono<{ Bindings: Bindings }>();
 
-app.get("/", (c) => {
+app.get("/api/", (c) => {
   return c.text("Hello Hono!");
 });
 
-app.get("/paintings", async (c) => {
+app.get("/api/paintings", async (c) => {
   const { results } = await c.env.DB.prepare("SELECT * FROM paintings;").all();
 
   return c.json(results);
 });
 
-app.get("/query", async (c) => {
+app.get("/api/query", async (c) => {
   const openai = new OpenAI({ apiKey: c.env.OPENAI_API_KEY });
 
-  let userQuery = "Feeling excited but nervous about my first day at work.";
+  // Get query from request URL params
+  const userQuery = c.req.query("query");
+  if (!userQuery) {
+    return c.json({ error: "Missing query parameter 'q'" }, 400);
+  }
 
-  let embeddingResponse = await openai.embeddings.create({
+  // Get embedding for user query
+  const embeddingResponse = await openai.embeddings.create({
     input: userQuery,
     model: "text-embedding-3-small",
   });
-  console.log(embeddingResponse);
 
-  let matches = await c.env.VECTORIZE.query(
+  // Find closest matching paintings in vector DB
+  const matches = await c.env.VECTORIZE.query(
     embeddingResponse.data[0].embedding,
     {
-      topK: 1,
+      topK: 1, // Get top match
     }
   );
 
-  //{"matches":{"count":1,"matches":[{"id":"12","score":0.21051788}]}}
+  if (!matches.matches.length) {
+    return c.json({ error: "No matches found" }, 404);
+  }
 
-  return c.json({ matches });
+  // Get painting details from SQL DB
+  const matchIds = matches.matches.map((m: { id: string }) => m.id).join(",");
+  const { results } = await c.env.DB.prepare(
+    `SELECT * FROM paintings WHERE id IN (${matchIds})`
+  ).all();
+
+  return c.json({
+    matches: matches.matches,
+    paintings: results,
+  });
 });
 
 export default app;
