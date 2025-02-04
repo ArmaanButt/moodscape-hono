@@ -27,6 +27,12 @@
       "pattern": "api.moodscape.llmprism.com",
       "custom_domain": true
     }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "moodscapeimages"
+    }
   ]
   // "compatibility_flags": [
   //   "nodejs_compat"

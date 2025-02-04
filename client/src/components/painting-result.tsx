@@ -12,21 +12,20 @@ interface PaintingResultProps {
   painting: Painting;
 }
 
+const R2_BUCKET_URL = "https://pub-596b9ffdcb0146e9ab93e537b7ddffb1.r2.dev";
+
 export function PaintingResult({ painting }: PaintingResultProps) {
+  const imageUrl = `${R2_BUCKET_URL}/${painting.id}.jpg?width=800&quality=80`;
+
   return (
     <Card className="p-4">
-      <div className="flex gap-4">
+      <div className="flex">
         <img
-          src={painting.image_url}
+          src={imageUrl}
           alt={painting.title}
           className="w-48 h-48 object-cover rounded-md"
+          loading="lazy"
         />
-        <div>
-          <h2 className="text-xl font-semibold">{painting.title}</h2>
-          <p className="text-gray-600">
-            {painting.artist} ({painting.year})
-          </p>
-        </div>
       </div>
     </Card>
   );

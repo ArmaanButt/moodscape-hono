@@ -42,10 +42,18 @@ export function ChatInterface() {
   return (
     <div className="max-w-2xl mx-auto p-4">
       <Card className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Art Mood Matcher</h1>
+        <h1 className="text-2xl font-bold mb-4">Moodscape</h1>
         <p className="text-gray-600 mb-4">
           Describe how you're feeling, and I'll find a painting that matches
-          your mood.
+          your mood from the works of Albert Bierstadt.
+        </p>
+
+        <p className="text-gray-600 mb-6">
+          Albert Bierstadt (1830-1902) was a German-American painter renowned
+          for his sweeping landscapes of the American West. His dramatic
+          paintings captured the grandeur and untamed beauty of the frontier,
+          from Yosemite Valley to the Rocky Mountains, often bathed in luminous
+          atmospheric effects.
         </p>
 
         <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
@@ -68,6 +76,18 @@ export function ChatInterface() {
           </div>
         )}
       </Card>
+
+      <footer className="text-center mt-6 text-sm text-gray-500">
+        Made with ❤️ by{" "}
+        <a
+          href="https://armaanbutt.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline"
+        >
+          Armaan Butt
+        </a>
+      </footer>
     </div>
   );
 }
